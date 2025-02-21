@@ -10,7 +10,7 @@ public class GameScreen extends JFrame  {
     private static final int maxScreenRow = 12;
     public static final int with = tileSize * maxScreenCol;//768
     public static final int height = tileSize * maxScreenRow;//576
-    private BackGround backGround = new BackGround();
+    private GamePanle backGround = new GamePanle();
 
 
     public GameScreen() {

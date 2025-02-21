@@ -1,18 +1,17 @@
-package player;
+package entity;
 
-public class player {
+public class Entity {
     private int x;
     private int y;
-    private int speed = 5;
-    public player(){
-        x = 100;
-        y = 100;
-    }
+    private int speed ;
     public void setX(int x){
         this.x = x;
     }
     public void setY(int y){
         this.y = y;
+    }
+    public void setSpeed(int speed){
+        this.speed = speed;
     }
     public int getX(){
         return x;

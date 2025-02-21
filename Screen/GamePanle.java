@@ -2,20 +2,20 @@ package Screen;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import player.player;
+import entity.Player;
 
 import java.awt.*;
 import java.awt.RenderingHints.Key;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-public class BackGround extends JPanel implements Runnable {
+public class GamePanle extends JPanel implements Runnable {
     private BufferedImage backGround;
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
-    int FPS = 60;
-    player plr = new player();
-    public BackGround() {
+    int FPS = 120;
+    Player plr = new  Player(100,100,5);
+    public GamePanle() {
         // try {
         //     //Đọc ảnh từ file
         //     backGround = ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/BackGround.png"));
@@ -24,6 +24,7 @@ public class BackGround extends JPanel implements Runnable {
         // } catch (IOException e) {//Bắt lỗi nếu không đọc được ảnh
         //     e.printStackTrace();
         // }
+        this.setBackground(Color.GRAY);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandle);
         this.setFocusable(true);
@@ -61,7 +62,6 @@ public class BackGround extends JPanel implements Runnable {
     public void update(){
         if (keyHandle.upPressed == true) {
             plr.setY(plr.getY() - plr.getSpeed());
-            System.out.println("up");
         }
         if (keyHandle.downPressed == true) {
             plr.setY(plr.getY() + plr.getSpeed());
@@ -78,7 +78,6 @@ public class BackGround extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {//Hàm paintComponent để vẽ ảnh lên
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        //g.setColor(Color.BLACK);
         g2d.setColor(Color.BLUE);
         g2d.fillRect(plr.getX(), plr.getY(), GameScreen.tileSize, GameScreen.tileSize);
         g2d.dispose();
