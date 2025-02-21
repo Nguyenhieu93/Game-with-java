@@ -1,10 +1,18 @@
 package Screen;
 import javax.swing.JFrame;
 
-public class GameScreen extends JFrame {
-    public static final int with = (int) (685*1.5);
-    public static final int height = (int) (384*1.5);
+public class GameScreen extends JFrame  {
+
+    private static final int originalTileSize =  16; //16x16
+    private static final int scale = 3;
+    public static final int tileSize = originalTileSize * scale;//48x48
+    private static final int maxScreenCol = 16;
+    private static final int maxScreenRow = 12;
+    public static final int with = tileSize * maxScreenCol;//768
+    public static final int height = tileSize * maxScreenRow;//576
     private BackGround backGround = new BackGround();
+
+
     public GameScreen() {
         this.add(backGround);
         setTitle("Game hay nhat the gioi");
@@ -14,10 +22,10 @@ public class GameScreen extends JFrame {
         setResizable(false);
         this.setVisible(true);
         backGround = new BackGround();
-        
     }
+    public void startGame() {
+        backGround.startGame();
+    }
+
     
-    public static void main(String[] args) {
-        new GameScreen();
-    }
 }
