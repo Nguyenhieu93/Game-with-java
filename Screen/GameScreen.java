@@ -21,7 +21,6 @@ public class GameScreen extends JFrame  {
         setLocationRelativeTo(null);
         setResizable(false);
         this.setVisible(true);
-        backGround = new BackGround();
     }
     public void startGame() {
         backGround.startGame();

@@ -16,17 +16,18 @@ public class BackGround extends JPanel implements Runnable {
     int FPS = 60;
     player plr = new player();
     public BackGround() {
-        try {
-            //Đọc ảnh từ file
-            backGround = ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/BackGround.png"));
-            //this.setBackground(Color.GRAY);
+        // try {
+        //     //Đọc ảnh từ file
+        //     backGround = ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/BackGround.png"));
+        //     //this.setBackground(Color.GRAY);
 
-        } catch (IOException e) {//Bắt lỗi nếu không đọc được ảnh
-            e.printStackTrace();
-        }
+        // } catch (IOException e) {//Bắt lỗi nếu không đọc được ảnh
+        //     e.printStackTrace();
+        // }
         this.setDoubleBuffered(true);
         this.addKeyListener(keyHandle);
         this.setFocusable(true);
+        this.requestFocus();
     }
     
     public void startGame() {
@@ -62,19 +63,17 @@ public class BackGround extends JPanel implements Runnable {
             plr.setY(plr.getY() - plr.getSpeed());
             System.out.println("up");
         }
-        else if (keyHandle.downPressed == true) {
+        if (keyHandle.downPressed == true) {
             plr.setY(plr.getY() + plr.getSpeed());
         }
-        else if (keyHandle.leftPressed == true) {
+        if (keyHandle.leftPressed == true) {
             plr.setX(plr.getX() - plr.getSpeed());
         }
-        else if (keyHandle.rightPressed == true) {
+        if (keyHandle.rightPressed == true) {
             plr.setX(plr.getX() + plr.getSpeed());
         }
     }
-    public void repaint(){
-        
-    }
+
     //Vẽ ảnh lên
     public void paintComponent(Graphics g) {//Hàm paintComponent để vẽ ảnh lên
         super.paintComponent(g);
