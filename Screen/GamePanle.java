@@ -50,7 +50,7 @@ public class GamePanle extends JPanel implements Runnable {
             detal += (currentTime - lastTime) / drawInterval;
             timer += currentTime - lastTime;
             lastTime = currentTime;
-            if (detal >= 1) {
+            if (detal >= 100) {
                 update();
                 repaint();
                 detal--;
