@@ -2,6 +2,7 @@ package Screen;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import entity.Enemy;
 import entity.Player;
 
 import java.awt.*;
@@ -13,8 +14,9 @@ public class GamePanle extends JPanel implements Runnable {
     private BufferedImage backGround;
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
-    int FPS = 120;
-    Player plr = new  Player(100,100,5);
+    int FPS = 420;
+    Player player = new  Player(100,100,2);
+    Enemy enemy = new Enemy(200,200,2);
     public GamePanle() {
         // try {
         //     //Đọc ảnh từ file
@@ -38,21 +40,26 @@ public class GamePanle extends JPanel implements Runnable {
     @Override
     public void run() {
         double drawInterval = 1000000000 / FPS;
-        double nextDrawTime = System.nanoTime() + drawInterval;
+        double detal = 0;
+        double lastTime = System.nanoTime();
+        long currentTime;
+        long timer = 0;
+        long drawCount = 0;
         while (gameThread != null) {
-            update();
-            repaint();
-            double remaining = nextDrawTime - System.nanoTime();
-            remaining = remaining / 1000000;
-            try {
-                if (remaining < 0 ){
-                    remaining = 0;
-                }
-                Thread.sleep( (long) (remaining));
-                nextDrawTime +=  drawInterval;
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+            currentTime = System.nanoTime();
+            detal += (currentTime - lastTime) / drawInterval;
+            timer += currentTime - lastTime;
+            lastTime = currentTime;
+            if (detal >= 1) {
+                update();
+                repaint();
+                detal--;
+                drawCount++;
+            }
+            if (timer >= 1000000000) {
+                System.out.println("FPS: " + drawCount);
+                drawCount = 0;
+                timer = 0;
             }
             //1. Update: cập nhât trạng thái của các đối tượng trong game
             //2. Render: Vẽ các đối
@@ -60,26 +67,16 @@ public class GamePanle extends JPanel implements Runnable {
         }
     }
     public void update(){
-        if (keyHandle.upPressed == true) {
-            plr.setY(plr.getY() - plr.getSpeed());
-        }
-        if (keyHandle.downPressed == true) {
-            plr.setY(plr.getY() + plr.getSpeed());
-        }
-        if (keyHandle.leftPressed == true) {
-            plr.setX(plr.getX() - plr.getSpeed());
-        }
-        if (keyHandle.rightPressed == true) {
-            plr.setX(plr.getX() + plr.getSpeed());
-        }
+        player.update(keyHandle);
+        enemy.update(player);
     }
 
     //Vẽ ảnh lên
     public void paintComponent(Graphics g) {//Hàm paintComponent để vẽ ảnh lên
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(Color.BLUE);
-        g2d.fillRect(plr.getX(), plr.getY(), GameScreen.tileSize, GameScreen.tileSize);
+        player.draw(g2d);
+        enemy.draw(g2d);
         g2d.dispose();
     }
 }
