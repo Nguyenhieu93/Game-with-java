@@ -31,14 +31,14 @@ public class Player extends Entity {
     }
 
     public void update(KeyHandle keyHandle) {
-        String tmp=flip;
+        String tempFlip = flip;
         if (keyHandle.upPressed || keyHandle.downPressed || keyHandle.leftPressed || keyHandle.rightPressed) {
-            if (keyHandle.upPressed == true) {
-                if (dt != "up") {
+            if (keyHandle.upPressed) {
+                if (!dt.equals("up")) {
                     setCurrentFrame(0);
                     setFrameCounter(0);
                     setTotalFrame(8);
-                    if (flip == "left") {
+                    if (flip.equals("left")) {
                         try {
                             setImage(
                                     ImageIO.read(new File("image/Player_Run.png")));
@@ -52,7 +52,7 @@ public class Player extends Entity {
                         try {
                             setImage(ImageIO.read(new File("image/Player_Run.png")));
                         } catch (IOException e) {
-                            // TODO Auto-generated catch block
+
                             e.printStackTrace();
                         }
                         dt = "up";
@@ -60,13 +60,13 @@ public class Player extends Entity {
                 }
                 setY(getY() - getSpeed());
             }
-            if (keyHandle.downPressed == true) {
-                if (dt != "down") {
+            if (keyHandle.downPressed) {
+                if (!dt.equals("down")) {
 
                     setCurrentFrame(0);
                     setFrameCounter(0);
                     setTotalFrame(8);
-                    if (flip == "left") {
+                    if (flip.equals("left")) {
                         try {
                             setImage(
                                     ImageIO.read(new File("image/Player_Run.png")));
@@ -88,8 +88,8 @@ public class Player extends Entity {
                 }
                 setY(getY() + getSpeed());
             }
-            if (keyHandle.leftPressed == true) {
-                if (dt != "left") {
+            if (keyHandle.leftPressed) {
+                if (!dt.equals("left")) {
                     dt = "left";
                     setCurrentFrame(0);
                     setFrameCounter(0);
@@ -104,8 +104,8 @@ public class Player extends Entity {
                 }
                 setX(getX() - getSpeed());
             }
-            if (keyHandle.rightPressed == true) {
-                if (dt != "right") {
+            if (keyHandle.rightPressed) {
+                if (!dt.equals("right")) {
                     dt = "right";
                     setCurrentFrame(0);
                     setFrameCounter(0);
@@ -134,17 +134,17 @@ public class Player extends Entity {
                     flip = "right";
                 }
                 else {
-                    if (flip == "left") {
+                    if (flip.equals("left")) {
                         setImage(flipImage(getImage(), true, false));
                     }
                 }
                 dt = "idle";
             }
             else {
-                if (flip == "left" && flip != tmp) {
+                if (flip.equals("left") && !flip.equals(tempFlip)) {
                     setImage(flipImage(getImage(), true, false));
                 }
-                tmp = flip;
+                tempFlip = flip;
             }
         }
         setFrameCounter(getFrameCounter() + 1);
@@ -169,6 +169,5 @@ public class Player extends Entity {
         int frameX = getCurrenFame() * getFrameWith();
         BufferedImage currentSprite = getImage().getSubimage(frameX, 0, getFrameWith(), getFrameHeight());
         g.drawImage(currentSprite, getX(), getY(), getFrameWith() * 2, getFrameHeight() * 2, null);
-        System.out.println(flip);
     }
 }

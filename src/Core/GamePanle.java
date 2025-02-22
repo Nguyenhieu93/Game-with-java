@@ -91,7 +91,7 @@ public class GamePanle extends JPanel implements Runnable {
 
     public void update() {
         player.update(keyHandle);
-        //spawner.update(player);
+        spawner.update(player);
     }
 
     // Vẽ ảnh lên
