@@ -1,4 +1,4 @@
-package entity;
+package src.Entity;
 
 public class SlimeEnemy {
 

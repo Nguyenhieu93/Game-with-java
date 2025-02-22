@@ -1,6 +1,6 @@
 package src;
 
-import Screen.GameScreen;
+import src.Screen.GameScreen;
 
 public class main {
     public static void main(String[] args) {

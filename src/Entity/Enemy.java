@@ -1,7 +1,8 @@
-package entity;
+package src.Entity;
 
-import Screen.GameScreen;
 import java.awt.*;
+
+import src.Screen.GameScreen;
 
 public class Enemy extends Entity {
     public Enemy(int x, int y, int speed) {
@@ -21,7 +22,7 @@ public class Enemy extends Entity {
     }
 
     // public void draw(Graphics2D g) {
-    //     g.setColor(Color.RED);
-    //     g.fillRect(getX(), getY(), GameScreen.tileSize, GameScreen.tileSize);
+    // g.setColor(Color.RED);
+    // g.fillRect(getX(), getY(), GameScreen.tileSize, GameScreen.tileSize);
     // }
 }

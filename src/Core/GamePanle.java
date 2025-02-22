@@ -1,12 +1,13 @@
-package Screen;
+package src.Core;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import entity.Bat;
-import entity.Enemy;
-import entity.Pig;
-import entity.Player;
+import src.Entity.Bat;
+import src.Entity.Enemy;
+import src.Entity.Pig;
+import src.Entity.Player;
+import src.Screen.KeyHandle;
 
 import java.awt.*;
 import java.awt.RenderingHints.Key;
@@ -20,15 +21,15 @@ public class GamePanle extends JPanel implements Runnable {
     private BufferedImage backGround;
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
-    int FPS = 420;
+    int FPS = 100;
 
     private Random random = new Random();
     private int spawnTimer = 0;
     private final int SPAWN_INTERVAL = 300;
 
-    Player player = new Player(100, 100, 2);
-    ArrayList<Bat> bats = new ArrayList<>();
-    ArrayList<Pig> pigs = new ArrayList<>();
+    private final Player player;
+    private final Spawner spawner;
+    private final Renderer renderer;
 
     public GamePanle() {
         // try {
@@ -45,6 +46,11 @@ public class GamePanle extends JPanel implements Runnable {
         this.addKeyListener(keyHandle);
         this.setFocusable(true);
         this.requestFocus();
+
+        player = new Player(100, 100, 4);
+        spawner = new Spawner();
+        renderer = new Renderer(player, spawner);
+
     }
 
     public void startGame() {
@@ -84,43 +90,12 @@ public class GamePanle extends JPanel implements Runnable {
 
     public void update() {
         player.update(keyHandle);
-        for (Bat bat : bats) {
-            bat.update(player);
-        }
-        for (Pig pig : pigs) {
-            pig.update(player);
-        }
-        spawnTimer++;
-        if (spawnTimer >= SPAWN_INTERVAL) {
-            spawnBat();
-            spawnPig();
-            spawnTimer = 0;
-        }
-    }
-
-    public void spawnBat() {
-        int x = random.nextInt(800 - 50);
-        int y = random.nextInt(600 - 50);
-        bats.add(new Bat(x, y, 2));
-    }
-
-    public void spawnPig() {
-        int x = random.nextInt(800 - 50);
-        int y = random.nextInt(600 - 50);
-        pigs.add(new Pig(x, y, 2));
+        spawner.update(player);
     }
 
     // Vẽ ảnh lên
     public void paintComponent(Graphics g) {// Hàm paintComponent để vẽ ảnh lên
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        player.draw(g2d);
-        for (Bat bat : bats) {
-            bat.draw(g2d);
-        }
-        for (Pig pig : pigs) {
-            pig.draw(g2d);
-        }
-        g2d.dispose();
+        renderer.render((Graphics2D) g);
     }
 }

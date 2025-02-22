@@ -1,25 +1,31 @@
-package entity;
+package src.Entity;
 
 public class Entity {
     private int x;
     private int y;
-    private int speed ;
-    public void setX(int x){
+    private int speed;
+
+    public void setX(int x) {
         this.x = x;
     }
-    public void setY(int y){
+
+    public void setY(int y) {
         this.y = y;
     }
-    public void setSpeed(int speed){
+
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
-    public int getX(){
+
+    public int getX() {
         return x;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
     }
-    public int getSpeed(){
+
+    public int getSpeed() {
         return speed;
     }
 }

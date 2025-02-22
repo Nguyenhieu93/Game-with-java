@@ -1,4 +1,4 @@
-package Screen;
+package src.Screen;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,6 +1,8 @@
-package Screen;
+package src.Screen;
 
 import javax.swing.JFrame;
+
+import src.Core.GamePanle;
 
 public class GameScreen extends JFrame {
 

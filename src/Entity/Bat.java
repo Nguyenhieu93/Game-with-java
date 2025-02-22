@@ -1,4 +1,4 @@
-package entity;
+package src.Entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -7,18 +7,18 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import Screen.GameScreen;
+import src.Screen.GameScreen;
 
-public class Pig extends Enemy {
+public class Bat extends Enemy {
     private BufferedImage spriteSheet;
-    private int frameWidth = 36, frameHeight = 30;
+    private int frameWidth = 46, frameHeight = 30;
     private int totalFrames = 7, currentFrame = 0;
     private int frameDelay = 25, frameCounter = 0;
 
-    public Pig(int x, int y, int speed) {
+    public Bat(int x, int y, int speed) {
         super(x, y, speed);
         try {
-            spriteSheet = ImageIO.read(new File("image/Idle (36x30).png"));
+            spriteSheet = ImageIO.read(new File("image/Flying (46x30).png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

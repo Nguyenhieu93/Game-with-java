@@ -1,16 +1,17 @@
-package entity;
-
-import Screen.GameScreen;
-import Screen.KeyHandle;
+package src.Entity;
 
 import java.awt.*;
 
-public class Player extends Entity{
+import src.Screen.GameScreen;
+import src.Screen.KeyHandle;
+
+public class Player extends Entity {
     public Player(int x, int y, int speed) {
         setX(x);
         setY(y);
         setSpeed(speed);
     }
+
     public void update(KeyHandle keyHandle) {
         if (keyHandle.upPressed == true) {
             setY(getY() - getSpeed());
