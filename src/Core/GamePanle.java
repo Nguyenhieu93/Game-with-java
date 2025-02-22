@@ -21,7 +21,8 @@ public class GamePanle extends JPanel implements Runnable {
     private BufferedImage backGround;
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
-    int FPS = 100;
+
+    int FPS = 120;
 
     private Random random = new Random();
     private int spawnTimer = 0;
