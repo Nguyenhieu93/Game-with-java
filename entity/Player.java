@@ -35,7 +35,7 @@ public class Player extends Entity {
                 if (dt == "left") {
                     try {
                         setImage(
-                                ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run_Left.png")));
+                                ImageIO.read(new File("image/Player_Run_Left.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -43,7 +43,7 @@ public class Player extends Entity {
                     dt = "up";
                 } else if (dt == "right") {
                     try {
-                        setImage(ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run.png")));
+                        setImage(ImageIO.read(new File("image/Player_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -64,7 +64,7 @@ public class Player extends Entity {
                 if (dt == "left") {
                     try {
                         setImage(
-                                ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run_Left.png")));
+                                ImageIO.read(new File("image/Player_Run_Left.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -72,7 +72,7 @@ public class Player extends Entity {
                     dt = "down";
                 } else if (dt == "right") {
                     try {
-                        setImage(ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run.png")));
+                        setImage(ImageIO.read(new File("image/Player_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -91,7 +91,7 @@ public class Player extends Entity {
                 setFrameCounter(0);
                 setTotalFrame(8);
                 try {
-                    setImage(ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run.png")));
+                    setImage(ImageIO.read(new File("image/Player_Run.png")));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -107,7 +107,7 @@ public class Player extends Entity {
                 setFrameCounter(0);
                 setTotalFrame(8);
                 try {
-                    setImage(ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Run.png")));
+                    setImage(ImageIO.read(new File("image/Player_Run.png")));
                 } catch (IOException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -147,7 +147,7 @@ public class Player extends Entity {
         setCurrentFrame(0);
         setFrameDelay(25);
         setFrameCounter(0);
-        setImage(ImageIO.read(new File("G:/My Drive/BTLJAVA/Game-with-java/image/Player_Idle.png")));
+        setImage(ImageIO.read(new File("image/Player_Idle.png")));
     }
 
     public void draw(Graphics2D g) {
