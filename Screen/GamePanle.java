@@ -14,7 +14,7 @@ public class GamePanle extends JPanel implements Runnable {
     private BufferedImage backGround;
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
-    int FPS = 420;
+    int FPS = 120;
     Player player = new  Player(100,100,2);
     Enemy enemy = new Enemy(200,200,2);
     public GamePanle() {
@@ -68,7 +68,7 @@ public class GamePanle extends JPanel implements Runnable {
     }
     public void update(){
         player.update(keyHandle);
-        enemy.update(player);
+        //enemy.update(player);
     }
 
     //Vẽ ảnh lên

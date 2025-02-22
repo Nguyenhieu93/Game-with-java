@@ -1,5 +1,7 @@
 package entity;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 public class Entity {
     private int x;
@@ -72,5 +74,33 @@ public class Entity {
     }
     public int getFrameCounter(){
         return this.frameCounter;
+    }
+
+    public static BufferedImage flipImage(BufferedImage image, boolean horizontal, boolean vertical) {
+        if (image == null) {
+            throw new IllegalArgumentException("Image cannot be null");
+        }
+
+        AffineTransform transform = new AffineTransform();
+        int width = image.getWidth();
+        int height = image.getHeight();
+
+        // Xác định kiểu lật ảnh
+        if (horizontal) {
+            transform.scale(-1, 1);
+            transform.translate(-width, 0);
+        }
+        if (vertical) {
+            transform.scale(1, -1);
+            transform.translate(0, -height);
+        }
+        if (horizontal && vertical) {
+            transform.scale(-1, -1);
+            transform.translate(-width, -height);
+        }
+
+        // Áp dụng phép biến đổi
+        AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+        return op.filter(image, null);
     }
 }
