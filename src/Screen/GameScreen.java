@@ -21,7 +21,7 @@ public class GameScreen extends JFrame {
         setSize(with, height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         this.setVisible(true);
     }
 

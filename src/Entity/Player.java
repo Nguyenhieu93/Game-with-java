@@ -33,15 +33,26 @@ public class Player extends Entity {
     public void update(KeyHandle keyHandle) {
         String tempFlip = flip;
         if (keyHandle.upPressed || keyHandle.downPressed || keyHandle.leftPressed || keyHandle.rightPressed) {
+
             if (keyHandle.upPressed) {
+//                if (keyHandle.rightPressed){
+//                    //Tinh toan di cheo
+//                    setY(getY() - getSpeed());
+//                    setX(getX() + getSpeed());
+//                }
+//                else {
+                    setY(getY() - getSpeed());
+//                }
                 if (!dt.equals("up")) {
                     setCurrentFrame(0);
+                    setFrameWith(48);
+                    setFrameHeight(50);
                     setFrameCounter(0);
                     setTotalFrame(8);
                     if (flip.equals("left")) {
                         try {
                             setImage(
-                                    ImageIO.read(new File("image/Player_Run.png")));
+                                    ImageIO.read(new File("image/_Run.png")));
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
@@ -50,7 +61,7 @@ public class Player extends Entity {
                         dt = "up";
                     } else {
                         try {
-                            setImage(ImageIO.read(new File("image/Player_Run.png")));
+                            setImage(ImageIO.read(new File("image/_Run.png")));
                         } catch (IOException e) {
 
                             e.printStackTrace();
@@ -58,18 +69,20 @@ public class Player extends Entity {
                         dt = "up";
                     }
                 }
-                setY(getY() - getSpeed());
+
             }
             if (keyHandle.downPressed) {
                 if (!dt.equals("down")) {
 
                     setCurrentFrame(0);
+                    setFrameWith(48);
+                    setFrameHeight(50);
                     setFrameCounter(0);
                     setTotalFrame(8);
                     if (flip.equals("left")) {
                         try {
                             setImage(
-                                    ImageIO.read(new File("image/Player_Run.png")));
+                                    ImageIO.read(new File("image/_Run.png")));
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
@@ -78,7 +91,7 @@ public class Player extends Entity {
                         dt = "down";
                     } else {
                         try {
-                            setImage(ImageIO.read(new File("image/Player_Run.png")));
+                            setImage(ImageIO.read(new File("image/_Run.png")));
                         } catch (IOException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
@@ -92,10 +105,12 @@ public class Player extends Entity {
                 if (!dt.equals("left")) {
                     dt = "left";
                     setCurrentFrame(0);
+                    setFrameWith(48);
+                    setFrameHeight(50);
                     setFrameCounter(0);
                     setTotalFrame(8);
                     try {
-                        setImage(ImageIO.read(new File("image/Player_Run.png")));
+                        setImage(ImageIO.read(new File("image/_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -108,10 +123,12 @@ public class Player extends Entity {
                 if (!dt.equals("right")) {
                     dt = "right";
                     setCurrentFrame(0);
+                    setFrameWith(48);
+                    setFrameHeight(50);
                     setFrameCounter(0);
                     setTotalFrame(8);
                     try {
-                        setImage(ImageIO.read(new File("image/Player_Run.png")));
+                        setImage(ImageIO.read(new File("image/_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
@@ -156,18 +173,18 @@ public class Player extends Entity {
     }
 
     private void setupDrawDefault() throws IOException {
-        setFrameWith(32);
-        setFrameHeight(32);
-        setTotalFrame(4);
+        setFrameWith(49);
+        setFrameHeight(53);
+        setTotalFrame(8);
         setCurrentFrame(0);
         setFrameDelay(10);
         setFrameCounter(0);
-        setImage(ImageIO.read(new File("image/Player_Idle.png")));
+        setImage(ImageIO.read(new File("image/_Idle.png")));
     }
 
     public void draw(Graphics2D g) {
         int frameX = getCurrenFame() * getFrameWith();
         BufferedImage currentSprite = getImage().getSubimage(frameX, 0, getFrameWith(), getFrameHeight());
-        g.drawImage(currentSprite, getX(), getY(), getFrameWith() * 2, getFrameHeight() * 2, null);
+        g.drawImage(currentSprite, getX(), getY(), getFrameWith() , getFrameHeight() , null);
     }
 }
