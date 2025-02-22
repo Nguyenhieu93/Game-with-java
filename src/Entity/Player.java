@@ -15,116 +15,112 @@ import src.Screen.KeyHandle;
 
 public class Player extends Entity {
     public String dt;
-
+    public String flip;
     public Player(int x, int y, int speed) {
         setX(x);
         setY(y);
         setSpeed(speed);
 
         dt = "idle";
+        flip = "right";
         try {
             setupDrawDefault();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public void update(KeyHandle keyHandle) {
-        if (keyHandle.upPressed == true) {
-            if (dt != "up") {
-
-                setCurrentFrame(0);
-                setFrameCounter(0);
-                setTotalFrame(8);
-                if (dt == "left") {
-                    try {
-                        setImage(
-                                ImageIO.read(new File("image/Player_Run_Left.png")));
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+        String tmp=flip;
+        if (keyHandle.upPressed || keyHandle.downPressed || keyHandle.leftPressed || keyHandle.rightPressed) {
+            if (keyHandle.upPressed == true) {
+                if (dt != "up") {
+                    setCurrentFrame(0);
+                    setFrameCounter(0);
+                    setTotalFrame(8);
+                    if (flip == "left") {
+                        try {
+                            setImage(
+                                    ImageIO.read(new File("image/Player_Run.png")));
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        setImage(flipImage(getImage(), true, false));
+                        dt = "up";
+                    } else {
+                        try {
+                            setImage(ImageIO.read(new File("image/Player_Run.png")));
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        dt = "up";
                     }
-                    dt = "up";
-                } else if (dt == "right") {
+                }
+                setY(getY() - getSpeed());
+            }
+            if (keyHandle.downPressed == true) {
+                if (dt != "down") {
+
+                    setCurrentFrame(0);
+                    setFrameCounter(0);
+                    setTotalFrame(8);
+                    if (flip == "left") {
+                        try {
+                            setImage(
+                                    ImageIO.read(new File("image/Player_Run.png")));
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        setImage(flipImage(getImage(), true, false));
+                        dt = "down";
+                    } else {
+                        try {
+                            setImage(ImageIO.read(new File("image/Player_Run.png")));
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        dt = "down";
+                    }
+                }
+                setY(getY() + getSpeed());
+            }
+            if (keyHandle.leftPressed == true) {
+                if (dt != "left") {
+                    dt = "left";
+                    setCurrentFrame(0);
+                    setFrameCounter(0);
+                    setTotalFrame(8);
                     try {
                         setImage(ImageIO.read(new File("image/Player_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    dt = "up";
-                } else {
-                    dt = "up";
+                    setImage(flipImage(getImage(), true, false));
                 }
+                setX(getX() - getSpeed());
             }
-            setY(getY() - getSpeed());
-        }
-        if (keyHandle.downPressed == true) {
-            if (dt != "down") {
-
-                setCurrentFrame(0);
-                setFrameCounter(0);
-                setTotalFrame(8);
-                if (dt == "left") {
-                    try {
-                        setImage(
-                                ImageIO.read(new File("image/Player_Run_Left.png")));
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    dt = "down";
-                } else if (dt == "right") {
+            if (keyHandle.rightPressed == true) {
+                if (dt != "right") {
+                    dt = "right";
+                    setCurrentFrame(0);
+                    setFrameCounter(0);
+                    setTotalFrame(8);
                     try {
                         setImage(ImageIO.read(new File("image/Player_Run.png")));
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    dt = "down";
-                } else {
-                    dt = "down";
                 }
+                setX(getX() + getSpeed());
             }
-            setY(getY() + getSpeed());
-        }
-        if (keyHandle.leftPressed == true) {
-            if (dt != "left") {
-                dt = "left";
-                setCurrentFrame(0);
-                setFrameCounter(0);
-                setTotalFrame(8);
-                try {
-                    setImage(ImageIO.read(new File("image/Player_Run.png")));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                setImage(flipImage(getImage(), true, false));
-            }
-            setX(getX() - getSpeed());
-        }
-        if (keyHandle.rightPressed == true) {
-            if (dt != "right") {
-                dt = "right";
-                setCurrentFrame(0);
-                setFrameCounter(0);
-                setTotalFrame(8);
-                try {
-                    setImage(ImageIO.read(new File("image/Player_Run.png")));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-            }
-            setX(getX() + getSpeed());
-        }
-        if (!keyHandle.upPressed
-                && !keyHandle.downPressed
-                && !keyHandle.leftPressed
-                && !keyHandle.rightPressed) {
 
+        }else {
             if (!dt.equals("idle")) {
                 try {
                     setupDrawDefault();
@@ -133,8 +129,22 @@ public class Player extends Entity {
                 }
                 if (dt.equals("left")) {
                     setImage(flipImage(getImage(), true, false));
+                    flip = "left";
+                }else if( dt.equals("right")) {
+                    flip = "right";
+                }
+                else {
+                    if (flip == "left") {
+                        setImage(flipImage(getImage(), true, false));
+                    }
                 }
                 dt = "idle";
+            }
+            else {
+                if (flip == "left" && flip != tmp) {
+                    setImage(flipImage(getImage(), true, false));
+                }
+                tmp = flip;
             }
         }
         setFrameCounter(getFrameCounter() + 1);
@@ -150,18 +160,15 @@ public class Player extends Entity {
         setFrameHeight(32);
         setTotalFrame(4);
         setCurrentFrame(0);
-        setFrameDelay(25);
+        setFrameDelay(10);
         setFrameCounter(0);
         setImage(ImageIO.read(new File("image/Player_Idle.png")));
     }
 
     public void draw(Graphics2D g) {
-
         int frameX = getCurrenFame() * getFrameWith();
         BufferedImage currentSprite = getImage().getSubimage(frameX, 0, getFrameWith(), getFrameHeight());
         g.drawImage(currentSprite, getX(), getY(), getFrameWith() * 2, getFrameHeight() * 2, null);
-
-        // g.setColor(Color.BLUE);
-        // g.fillRect(getX(), getY(), GameScreen.tileSize, GameScreen.tileSize);
+        System.out.println(flip);
     }
 }

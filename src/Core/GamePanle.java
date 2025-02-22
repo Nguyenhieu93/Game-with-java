@@ -22,7 +22,7 @@ public class GamePanle extends JPanel implements Runnable {
     KeyHandle keyHandle = new KeyHandle();
     Thread gameThread;
 
-    int FPS = 120;
+    int FPS = 60;
 
     private Random random = new Random();
     private int spawnTimer = 0;
@@ -48,7 +48,7 @@ public class GamePanle extends JPanel implements Runnable {
         this.setFocusable(true);
         this.requestFocus();
 
-        player = new Player(100, 100, 4);
+        player = new Player(100, 100, 3);
         spawner = new Spawner();
         renderer = new Renderer(player, spawner);
 
@@ -79,7 +79,7 @@ public class GamePanle extends JPanel implements Runnable {
                 drawCount++;
             }
             if (timer >= 1000000000) {
-                System.out.println("FPS: " + drawCount);
+                //System.out.println("FPS: " + drawCount);
                 drawCount = 0;
                 timer = 0;
             }
@@ -91,7 +91,7 @@ public class GamePanle extends JPanel implements Runnable {
 
     public void update() {
         player.update(keyHandle);
-        spawner.update(player);
+        //spawner.update(player);
     }
 
     // Vẽ ảnh lên
