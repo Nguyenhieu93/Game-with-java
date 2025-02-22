@@ -13,6 +13,8 @@ public class Spawner {
     private final Random random;
     private int spawnTimer;
     private static final int SPAWN_INTERVAL = 300;
+    private static final int SPAWN_MIN_DISTANCE = 100;
+    private static final int SPAWN_MAX_DISTANCE = 200;
 
     public Spawner() {
         bats = new ArrayList<>();
